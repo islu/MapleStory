@@ -8,9 +8,76 @@
   <link rel="stylesheet" href="CSS/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="CSS/Global.css" type="text/css" >
   <script src="JS/vue.js"></script>
+
+  <style>
+    .item-borad {
+      border: solid 1px black;
+      background-color: white;
+    }
+    .bag {
+      background-color: dimgrey;
+      width: 280px;
+    }
+  </style>
 </head>
 <body>
-
-
+  <div id="demo">
+    <div class="bag" @mousedown="mousedown" @mouseup="mouseup" @mousemove="mousemove" :style="style">
+      <div class="container" style="width: 280px;">
+        <span>Bag</span>
+        <input type="button" value="x" class="float-right">
+        <br>
+        <br>
+        <div v-for="row in 5" class="row Larger shadow m-1">
+          <div v-for="col in 4" class="col m-1 text-center item-borad">
+            <img src="Use_Sunrise_Dew.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
 </body>
 </html>
+
+<script>
+  new Vue({
+    el: '#demo',
+    data: {
+      active: false,
+      currX: null,
+      currY: null,
+      initX: null,
+      initY: null,
+      xOffset: 0,
+      yOffset: 0,
+      style: null,
+    },
+    methods: {
+      mousedown(e) {
+        this.initX = e.clientX - this.xOffset;
+        this.initY = e.clientY - this.yOffset;
+
+        this.active = true;
+      },
+      mouseup(e) {
+        this.initX = this.currX;
+        this.initY = this.currY;
+        this.active = false;
+      },
+      mousemove(e) {
+        if (this.active) {
+          e.preventDefault();
+          
+          this.currX = e.clientX - this.initX;
+          this.currY = e.clientY - this.initY;
+          
+          this.xOffset = this.currX;
+          this.yOffset = this.currY;
+          console.log(this.currX,this.currY);
+          this.style = 'transform: translate3d('+this.currX+'px,'+this.currY+'px, 0);';
+        }
+      },
+
+    },
+})
+</script>
