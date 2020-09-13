@@ -7,37 +7,86 @@
   <link href="favicon.ico" rel="icon" type="image/x-icon" />
   <link rel="stylesheet" href="CSS/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="CSS/Global.css" type="text/css" >
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="JS/vue.js"></script>
+  <script src="JS/maplystory.js"></script>
 
   <style>
     .item-borad {
       border: solid 1px black;
       background-color: white;
     }
-    .bag {
-      background-color: dimgrey;
-      width: 280px;
-    }
   </style>
 </head>
 <body>
   <div id="demo">
-    <div class="bag" @mousedown="mousedown" @mouseup="mouseup" @mousemove="mousemove" :style="style">
-      <div class="container" style="width: 280px;">
-        <span>Bag</span>
-        <input type="button" value="x" class="float-right">
-        <br>
-        <br>
-        <div v-for="row in 5" class="row Larger shadow m-1">
-          <div v-for="col in 4" class="col m-1 text-center item-borad">
-            <img src="Use_Sunrise_Dew.png" alt="">
+    <div v-if="!close_mark" class="maplestory-container" @mousedown="mousedown" @mouseup="mouseup" @mousemove="mousemove" :style="style" >      
+      <div class="maplestory-title"><span>ITEM INVENTORY</span><i class="fa fa-times float-right" style="font-size: 16px;" @click="closeWindow"></i></div>
+      
+      <div class="container maplestory-main">
+        <div class="row p-3">
+          <div class="col pl-0"><input class="input" type="button" value="EQUIP"></div>
+          <div class="col pl-0"><input class="input" type="button" value="USE"></div>
+          <div class="col pl-0"><input class="input" type="button" value="ETC"></div>
+          <div class="col pl-0"><input class="input" type="button" value="SET-UP"></div>
+          <div class="col pl-0"><input class="input" type="button" value="CASH"></div>
+        </div>
+
+        <div class="p-3">
+          <div v-for="row in 5" class="row">
+            <div v-for="col in 4" class="col item-borad">
+              <img src="Assets/Item/Use_Sunrise_Dew.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <img src="Assets/Item/Use_Sunrise_Dew.png" alt="" @click="openWindow">
+
+    <!-- <div id="components-demo">
+      <ms-item :Name='Name'
+      :Type='Type' 
+      :Description='Description'
+      :Effects='Effects'
+      :Img_Path='Img_Path'
+      ></ms-item>
+    </div> -->
+    <div id="components-demo">
+      <div class="maplestory-container" style="box-shadow: none; width: 400px; position: relative;">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col maplestory-item-title">{{Name}}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <img :src=Img_Path alt="" width="100%" style="padding: 20px;">
+          </div>
+          <div class="col-8" style="color: white; padding-right: 20px;">
+            {{Description}}
           </div>
         </div>
       </div>
     </div>
-    </div>
+
+  </div>
 </body>
 </html>
+
+<script>
+  new Vue({
+     el: '#components-demo',
+     data: {
+      Name: 'Sunrise Dew',
+      Type: 'Food',
+      Description: 'Dew collected in the early morning.',
+      Effects: 'Recovers 4,000 MP',
+      Img_Path: 'Assets/Item/Use_Sunrise_Dew.png',
+     } 
+  })
+</script>
 
 <script>
   new Vue({
@@ -51,6 +100,7 @@
       xOffset: 0,
       yOffset: 0,
       style: null,
+      close_mark: false,
     },
     methods: {
       mousedown(e) {
@@ -73,11 +123,22 @@
           
           this.xOffset = this.currX;
           this.yOffset = this.currY;
-          console.log(this.currX,this.currY);
+          //console.log(this.currX,this.currY);
+          this.style = 'transform: translate3d('+this.currX+'px,'+this.currY+'px, 0);';
+          this.style += 'cursor: url(Assets/Cursor/cousor_move.cur), move;';
+        }
+        else {
           this.style = 'transform: translate3d('+this.currX+'px,'+this.currY+'px, 0);';
         }
       },
-
+      closeWindow(e) {
+        let vm = this;    
+        vm.close_mark = true;
+      },
+      openWindow(e) {
+        let vm = this;
+        vm.close_mark = false;
+      }
     },
 })
 </script>
