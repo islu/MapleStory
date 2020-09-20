@@ -1,1 +1,4 @@
-# MaplyStory-Bag
+# MapleStory
+
+- [ ] Item Inventory
+- [ ] NPC Dialog

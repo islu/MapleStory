@@ -13,6 +13,18 @@ input:hover {
   cursor: url(../Assets/Cursor/cursor_hover.ani), url(../Assets/Cursor/cursor_hover.gif), pointer;
 }
 
+button:hover {
+  cursor: url(../Assets/Cursor/cursor_hover.ani), url(../Assets/Cursor/cursor_hover.gif), pointer;
+}
+button .fa-arrow-up,.fa-arrow-left {
+  color: white;
+}
+button {
+  background-color: rgba(0, 0, 0, 0.714);
+  box-shadow: inset 0 4px 5px rgba(255, 255, 255, 0.408);
+  border-radius: 8px;
+}
+
 
 .maplestory-container {
   width: 280px;
@@ -33,6 +45,7 @@ input:hover {
   /* text-shadow: -0px 3px 10px rgba(255, 255, 255, 0.61),2px 0 8px #FFF; */
   padding: 0px 10px;
   color: rgb(255, 208, 0);
+  text-align: center;
   /* box-shadow: inset 0 0 84px rgba(0, 0, 0, 0.43); */
   /* background: url("https://cdn4.iconfinder.com/data/icons/seed-png/program_group.png") no-repeat 1% 85%; */
   /* background-size: 24px; */
@@ -62,6 +75,7 @@ input:hover {
 
 .fa-times {
   color: white;
+  font-size: 16px;
 }
 
 .maplestory-item {
@@ -71,4 +85,9 @@ input:hover {
   color: white;
   font-size: large;
   font-weight: bold;
+}
+
+.maplestor-item-background {
+  background-color: gray;
+  border-radius: 10px;
 }
