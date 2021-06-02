@@ -1,19 +1,23 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  <br/>
-  <MapleStoryGobang/>
+  <BaseMapleStoryDialog
+    title="Maple Story Gobang"
+    width="400"
+  >
+    <MapleStoryGomoku/>
+  </BaseMapleStoryDialog>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue';
-import MapleStoryGobang from './components/MapleStoryGobang.vue';
+import BaseMapleStoryDialog from './components/BaseMapleStoryDialog.vue';
+import MapleStoryGomoku from './components/MapleStoryGomoku.vue';
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld,
-    MapleStoryGobang,
+    BaseMapleStoryDialog,
+    MapleStoryGomoku,
+  },
+  computed: {
   },
 };
 </script>
@@ -25,18 +29,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 html {
-  cursor:
-    /* url('../static/cursor/cursor.ani'), */
-    url('../static/cursor/cursor.gif'),
-    default;
+  cursor: url('../static/cursor/cursor.gif'), default;
 }
 html:active {
-  cursor:
-    /* url('../static/cursor/cursor_hover.ani'), */
-    url('../static/cursor/cursor_active.gif'),
-    default;
+  cursor: url('../static/cursor/cursor_active.gif'), default;
 }
 </style>

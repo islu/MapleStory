@@ -1,5 +1,4 @@
 <template>
-  player: {{player}}
   <div class="container">
     <i
       v-for="(value, index) in board"
@@ -7,7 +6,6 @@
       @click="checkPoint(index)"
     >
       <img :src="imgPath(value)" class="chess">
-      <!-- {{value}} -->
     </i>
   </div>
 </template>
@@ -17,16 +15,19 @@ import green from '@/assets/green.png';
 import yellow from '@/assets/yellow.png';
 
 export default {
-  name: 'MapleStoryGobang',
+  name: 'MapleStoryGomoku',
   data() {
     return {
       board: [],
       player: 0,
+      isOver: false,
     };
   },
   created() {
+    // init
     this.board = Array(225).fill(0);
     this.player = 1;
+    this.isOver = false;
   },
   copmuted: {
   },
@@ -89,9 +90,11 @@ export default {
     },
     alertIfWin(str) {
       if (this.blackWin(str)) {
-        alert('黑子勝利');
+        // alert('黑子勝利');
+        this.isOver = true;
       } else if (this.whiteWin(str)) {
-        alert('白子勝利');
+        // alert('白子勝利');
+        this.isOver = true;
       }
     },
     blackWin(str) {
@@ -109,14 +112,11 @@ export default {
       }
       return '';
     },
-    // imgStyle(value) {
-    //   return `background-image: url(${this.imgPath(value)})`;
-    // },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   width: 360px;
   display: flex;
@@ -124,23 +124,13 @@ export default {
   margin: 0 auto;
   border: solid 1px;
   padding: 5px;
-  transform: scale(1.2);
+  /* transform: scale(1.2); */
 }
-/* .square {
-  width: 20px;
-  height: 20px;
-  padding: 10px;
-  border: 1px solid #000;
-  border-collapse: collapse;
-  background: #F9CC9D;
-  margin: 0px -1px -1px 0px;
-} */
 i {
   position: relative;
   display: inline-block;
   width: 24px;
   height: 24px;
-  /* cursor: url('../../static/cursor/cursor_hover.gif'), pointer; */
   text-align: left;
   background: #F9CC9D;
 }
