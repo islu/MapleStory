@@ -1,6 +1,6 @@
 <template>
   <BaseMapleStoryDialog
-    title="Maple Story Gobang"
+    title="Maple Story Gomoku"
     width="400"
   >
     <MapleStoryGomoku/>

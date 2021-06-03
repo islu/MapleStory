@@ -5,14 +5,16 @@
       :key="index"
       @click="checkPoint(index)"
     >
-      <img :src="imgPath(value)" class="chess">
+      <img :src="imgPath(index, value)" class="chess">
     </i>
   </div>
 </template>
 
 <script>
-import green from '@/assets/green.png';
-import yellow from '@/assets/yellow.png';
+import mushroomStatic from '@/assets/gomoku/mushroom.png';
+import mushroomIdleAnim from '@/assets/gomoku/mushroom.gif';
+import slimeStatic from '@/assets/gomoku/slime.png';
+import slimeIdleAnim from '@/assets/gomoku/slime.gif';
 
 export default {
   name: 'MapleStoryGomoku',
@@ -21,6 +23,7 @@ export default {
       board: [],
       player: 0,
       isOver: false,
+      lastStoneIndex: null,
     };
   },
   created() {
@@ -28,6 +31,7 @@ export default {
     this.board = Array(225).fill(0);
     this.player = 1;
     this.isOver = false;
+    this.lastStoneIndex = null;
   },
   copmuted: {
   },
@@ -39,6 +43,7 @@ export default {
       this.board[index] = this.player;
       this.player = this.player === 1 ? 2 : 1;
       this.isWin(index);
+      this.lastStoneIndex = index;
     },
     isWin(index) {
       const row = parseInt(index / 15, 10);
@@ -103,12 +108,20 @@ export default {
     whiteWin(str) {
       return str.includes('22222');
     },
-    imgPath(value) {
+    imgPath(index, value) {
+      if (index === this.lastStoneIndex) {
+        if (value === 1) {
+          return mushroomIdleAnim;
+        }
+        if (value === 2) {
+          return slimeIdleAnim;
+        }
+      }
       if (value === 1) {
-        return green;
+        return mushroomStatic;
       }
       if (value === 2) {
-        return yellow;
+        return slimeStatic;
       }
       return '';
     },
@@ -132,7 +145,8 @@ i {
   width: 24px;
   height: 24px;
   text-align: left;
-  background: #F9CC9D;
+  /* background: #F9CC9D; */
+  background-color: white;
 }
 i::before,
 i::after {
