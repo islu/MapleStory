@@ -1,8 +1,14 @@
 <template>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <div class="maplestory-container" :style="containerStyle">
-    <div class="maplestory-title">
+  <div class="maplestory-container"
+    :style="style"
+    @mousemove="handleMouseMove"
+    @mouseup="handleMouseUp"
+  >
+    <div class="maplestory-title"
+      @mousedown="handleMouseDown"
+    >
       {{ title }}
       <span style="float:right">
         <i class="fa fa-times"></i>
@@ -10,16 +16,31 @@
     </div>
     <slot></slot>
   </div>
-
 </template>
 
 <script>
+import moveCousor from '../../static/cursor/cursor_move.gif';
+
 export default {
   name: 'BaseMapleStoryDialog',
+  data() {
+    return {
+      currentX: 0,
+      currentY: 0,
+      draggable: false,
+    };
+  },
+  created() {
+    this.offsetX = 0;
+    this.offsetY = 0;
+    this.draggable = false;
+  },
   computed: {
-    containerStyle() {
+    style() {
       return {
         width: `${this.width}px`,
+        transform: `translate3d(${this.currentX}px, ${this.currentY}px, 0px)`,
+        cursor: this.draggable ? `url(${moveCousor}), move` : '',
       };
     },
   },
@@ -29,6 +50,27 @@ export default {
     },
     width: {
       type: [Number, String],
+    },
+  },
+  methods: {
+    handleMouseDown(event) {
+      this.initX = event.clientX - this.offsetX;
+      this.initY = event.clientY - this.offsetY;
+      this.draggable = true;
+    },
+    handleMouseMove(event) {
+      if (this.draggable) {
+        event.preventDefault();
+        this.currentX = event.clientX - this.initX;
+        this.currentY = event.clientY - this.initY;
+        this.offsetX = this.currentX;
+        this.offsetY = this.currentY;
+      }
+    },
+    handleMouseUp() {
+      this.initX = this.currentX;
+      this.initY = this.currentY;
+      this.draggable = false;
     },
   },
 };
@@ -46,7 +88,7 @@ export default {
 }
 
 .maplestory-title {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   font-family: arial;
   -webkit-text-stroke: .6px black; /* width and color */
