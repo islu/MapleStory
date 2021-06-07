@@ -139,6 +139,7 @@ export default {
   padding: 5px;
   /* transform: scale(1.2); */
 }
+
 i {
   position: relative;
   display: inline-block;
@@ -148,6 +149,7 @@ i {
   /* background: #F9CC9D; */
   background-color: white;
 }
+
 i::before,
 i::after {
   content: ' ';
@@ -157,6 +159,7 @@ i::after {
   height: 0;
   border-top: 1px solid #333;
 }
+
 i::after {
   top: 0;
   right: 12px;
@@ -165,6 +168,7 @@ i::after {
   border-top: 0 none;
   border-right: 1px solid #333;
 }
+
 .chess {
   position: relative;
   margin: 0px 0px -7px 0px;

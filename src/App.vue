@@ -1,10 +1,16 @@
 <template>
-  <BaseMapleStoryDialog
-    title="Maple Story Gomoku"
-    width="400"
-  >
-    <MapleStoryGomoku/>
-  </BaseMapleStoryDialog>
+  <div v-if="isGomokuOpen">
+    <BaseMapleStoryDialog
+      title="Maple Story Gomoku"
+      width="400"
+    >
+      <MapleStoryGomoku/>
+    </BaseMapleStoryDialog>
+  </div>
+
+  <footer>
+    <button @click="gomokuControll">Gomoku</button>
+  </footer>
 </template>
 
 <script>
@@ -17,7 +23,17 @@ export default {
     BaseMapleStoryDialog,
     MapleStoryGomoku,
   },
+  data() {
+    return {
+      isGomokuOpen: false,
+    };
+  },
   computed: {
+  },
+  methods: {
+    gomokuControll() {
+      this.isGomokuOpen = !this.isGomokuOpen;
+    },
   },
 };
 </script>
@@ -31,10 +47,19 @@ export default {
   color: #2c3e50;
   margin-top: 30px;
 }
+
 html {
   cursor: url('../static/cursor/cursor.gif'), default;
 }
+
 html:active {
   cursor: url('../static/cursor/cursor_active.gif'), default;
+}
+
+footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 10px;
 }
 </style>
