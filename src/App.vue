@@ -1,27 +1,22 @@
 <template>
   <div v-if="isGomokuOpen">
-    <BaseMapleStoryDialog
-      title="Maple Story Gomoku"
-      width="400"
-    >
-      <MapleStoryGomoku/>
-    </BaseMapleStoryDialog>
+    <MapleStoryGomoku/>
   </div>
-
+  <MapleStoryNpc/>
   <footer>
     <button @click="gomokuControll">Gomoku</button>
   </footer>
 </template>
 
 <script>
-import BaseMapleStoryDialog from './components/BaseMapleStoryDialog.vue';
 import MapleStoryGomoku from './components/MapleStoryGomoku.vue';
+import MapleStoryNpc from './components/MapleStoryNpc.vue';
 
 export default {
   name: 'App',
   components: {
-    BaseMapleStoryDialog,
     MapleStoryGomoku,
+    MapleStoryNpc,
   },
   data() {
     return {

@@ -1,13 +1,18 @@
 <template>
-  <div class="container">
-    <i
-      v-for="(value, index) in board"
-      :key="index"
-      @click="checkPoint(index)"
-    >
-      <img :src="imgPath(index, value)" class="chess">
-    </i>
-  </div>
+  <BaseMapleStoryContainer
+    title="Maple Story Gomoku"
+    width="400"
+  >
+    <div class="container">
+      <i
+        v-for="(value, index) in board"
+        :key="index"
+        @click="checkPoint(index)"
+      >
+        <img :src="imgPath(index, value)" class="chess">
+      </i>
+    </div>
+  </BaseMapleStoryContainer>
 </template>
 
 <script>
@@ -15,9 +20,13 @@ import mushroomStatic from '@/assets/gomoku/mushroom.png';
 import mushroomIdleAnim from '@/assets/gomoku/mushroom.gif';
 import slimeStatic from '@/assets/gomoku/slime.png';
 import slimeIdleAnim from '@/assets/gomoku/slime.gif';
+import BaseMapleStoryContainer from '@/components/BaseMapleStoryContainer.vue';
 
 export default {
   name: 'MapleStoryGomoku',
+  components: {
+    BaseMapleStoryContainer,
+  },
   data() {
     return {
       board: [],

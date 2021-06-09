@@ -22,7 +22,7 @@
 import moveCousor from '../../static/cursor/cursor_move.gif';
 
 export default {
-  name: 'BaseMapleStoryDialog',
+  name: 'BaseMapleStoryContainer',
   data() {
     return {
       currentX: 0,
